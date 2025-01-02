@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO & Security Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SEO & Security Analyzer</h1>
+            <p class="subtitle">Analyze the SEO and security of your website</p>
+        </header>
+
+        <!-- Analysis Form -->
+        <form id="analyze-form" aria-labelledby="form-title">
+            <label for="url-input" id="form-title" class="sr-only">Enter Website URL</label>
+            <input 
+                type="url" 
+                id="url-input" 
+                name="url" 
+                placeholder="Enter website URL" 
+                required 
+                aria-required="true" 
+                aria-describedby="url-help"
+                aria-label="Website URL">
+            <small id="url-help">Example: https://www.example.com</small>
+            <button type="submit" aria-label="Submit URL for analysis" id="analyze-btn">Analyze</button>
+        </form>
+
+        <!-- Loader -->
+        <div id="loader" class="loader" style="display: none;" role="status" aria-live="polite">
+            <span class="sr-only">Analyzing...</span>
+        </div>
+
+        <!-- Results Section -->
+        <div id="result" class="result" style="display: none;">
+            <h2>Analysis Results</h2>
+
+            <!-- SEO Elements -->
+            <section class="result-section">
+                <h3>SEO Elements</h3>
+                <p><strong>Title:</strong> <span id="title" role="text"></span></p>
+                <p><strong>Meta Description:</strong> <span id="meta-description" role="text"></span></p>
+            </section>
+
+            <!-- Security Information -->
+            <section class="result-section">
+                <h3>Security Information</h3>
+                <p><strong>SSL Version:</strong> <span id="ssl-version" role="text"></span></p>
+                <p><strong>Cipher:</strong> <span id="cipher" role="text"></span></p>
+                <p><strong>Expires On:</strong> <span id="expires-on" role="text"></span></p>
+                <p><strong>Days Until Expiry:</strong> <span id="days-until-expiry" role="text"></span></p>
+            </section>
+
+            <!-- Vulnerabilities Detected -->
+            <section class="result-section">
+                <h3>Vulnerabilities Detected</h3>
+                <ul id="vulnerabilities-list">
+                    <li id="sql-injection" class="vulnerable"><strong>SQL Injection:</strong> <span>No issues detected</span></li>
+                    <li id="xss" class="vulnerable"><strong>XSS:</strong> <span>No issues detected</span></li>
+                    <li id="open-ports" class="vulnerable"><strong>Open Ports:</strong> <span>No open ports detected</span></li>
+                    <li id="directory-traversal" class="vulnerable"><strong>Directory Traversal:</strong> <span>No issues detected</span></li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="error" style="display: none;" role="alert" aria-live="assertive">
+            <p>Error: <span id="error-text"></span></p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success" style="display: none;" role="alert" aria-live="assertive">
+            <p>Analysis completed successfully.</p>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
